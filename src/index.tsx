@@ -1,16 +1,22 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@mui/material';
+import { CssBaseline } from '@mui/material';
+import theme from './theme/theme';
+import "rc-drawer/assets/index.css";
+import { ManagedUIContext } from './context/uiContext'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+      <ManagedUIContext>
+          <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <App />
+          </ThemeProvider>
+      </ManagedUIContext>
 );
 
 // If you want to start measuring performance in your app, pass a function
