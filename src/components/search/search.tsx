@@ -80,9 +80,9 @@ export default function Search() {
 								flexDirection:"column",
 								marginRight:"auto",
 								marginLeft:"auto",
-								marginBottom:"16px",
-								backgroundColor:"#fff",
+								marginBottom:"15px",
 								width:"100%",
+								backgroundColor:"#fff",
 							}}>
 							<SearchBox
 								onSubmit={handleSearch}

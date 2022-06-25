@@ -48,16 +48,16 @@ export function taskCount (items:ITask[]) {
     return items.length
 }
   
-export const setTodo = (state: any,todo:any) =>{
+export const setTodo = (state: any , todo:any) =>{
     const {
         items,
+        count
     } = todo
-    const totalUniqueItems = taskCount(items);
 
     return {
       ...state,
       items: (items),
-      count : totalUniqueItems,
-      isEmpty: totalUniqueItems === 0,
+      count : count,
+      isEmpty: count === 0 ? true : false,
     };
   }

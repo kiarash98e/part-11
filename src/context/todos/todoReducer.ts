@@ -18,7 +18,7 @@ type Action =
   export interface State {
     items: ITask[];
     isEmpty: boolean;
-
+    count: number;
   }
 
   export const intialState : State = {
@@ -29,7 +29,8 @@ type Action =
         priority: "priority",
         deadline: new Date()
     }],
-    isEmpty: true
+    isEmpty: true,
+    count : 0
   }
 
 
@@ -60,7 +61,7 @@ type Action =
       ...state,
       items: (items),
       count : totalUniqueItems,
-      isEmpty: totalUniqueItems === 0,
+      isEmpty: totalUniqueItems === 0 ? true : false,
     }
   }
   

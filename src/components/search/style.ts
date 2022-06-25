@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme:Theme) =>
             borderRadius:"28px",
             backgroundColor:theme.palette.grey[100],
             border:0,
+            [theme.breakpoints.down("lg")]:{width:"96%"},
         },
         searchLogo:{
           display: 'flex',
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme:Theme) =>
           },
         },
         searchInput:{
-		      	color:"#212121",
+		    color:"#212121",
             background:"transparent",
             outline:"none",
             width:"92%",
