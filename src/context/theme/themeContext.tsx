@@ -15,9 +15,8 @@ const useTheme = () => {
 const  ThemeProvider:React.FC<any>  =  (props)  =>  {
     const  [toggle, setToggle]  =  React.useState(false);
     const toggleFunction =  ()  =>  {
-    setToggle(!toggle);
-
-};
+        setToggle(!toggle)
+    }
 
 const value = React.useMemo(
     () => ({

@@ -7,13 +7,9 @@ const Search = lazy(() => import("./components/search/search"))
 const MagendModal = lazy(() => import("./components/modal/fcModal"))
 
 
-import { useTodo } from './context/todos/todoContext'
-
 
 const App: React.FC = () => {
 
-  const items = useTodo()
-  console.log(items)
   
   return (
     <>

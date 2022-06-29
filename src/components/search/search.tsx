@@ -9,22 +9,28 @@ import {
 } from "body-scroll-lock";
 import { Box } from "@mui/material";
 import { useStyles } from "./style";
+import { useTodo } from "../../context/todos/todoContext";
 
 export default function Search() {
 	const { displaySearch, closeSearch } = useUI();
-	const [searchText, setSearchText] = React.useState("");
+	const [searchText, setSearchText] = React.useState("")
+	const { filterTask } = useTodo()
 
 	function handleSearch(e: React.SyntheticEvent) {
-		e.preventDefault();
+		e.preventDefault()
+		closeSearch()
+		filterTask(searchText)
+		setSearchText("")
 	}
 
 	
 
 	function handleAutoSearch(e: React.FormEvent<HTMLInputElement>) {
-		setSearchText(e.currentTarget.value);
+		setSearchText(e.currentTarget.value)
+		
 	}
 	function clear() {
-		setSearchText("");
+		setSearchText("")
 		
 	}
 

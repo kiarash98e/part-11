@@ -23,8 +23,7 @@ const Layout: React.FC = () => {
   const classes = useStyles()
 
   const { toggle } : any | boolean = useTheme()
-  const { items , isEmpty } : any  = useTodo()
-
+  const { items , isEmpty , count } : any  = useTodo()
   const headCells = [
     {
       id: 'task',
@@ -73,18 +72,26 @@ const Layout: React.FC = () => {
         
         <Header />
         <Main>
+          
             <Box
               sx={{
                 width:"100%",
                 height:"100%",
-                p:4
+                p:4,
+                display: 'flex',
+                flexDirection: 'column',
+                
               }}
             >
+                <Box sx={{p:3,fontWeight:"bold",color:toggle ? "white":"#212121",display:"inline-block"}}>
+                  {count > 0 ? `${count} Todo` :null}
+                </Box>
                 <RcTable 
                   toggle={toggle} 
                   isEmpty={isEmpty} 
                   data={items} 
                   headCells={headCells}
+                  count={count}
                 />
             </Box>
         </Main>

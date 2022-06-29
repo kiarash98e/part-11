@@ -83,6 +83,7 @@ const useStyles = makeStyles((theme:Theme) =>
         searchClose:{
             outline: "2px solid transparent",
             fontSize:"24px",
+            cursor: 'pointer',
             border:0,
             [theme.breakpoints.up("md")]:{
                 fontSize:"30px",

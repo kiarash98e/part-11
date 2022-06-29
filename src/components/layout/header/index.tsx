@@ -10,15 +10,21 @@ import { MdLightMode, MdDarkMode } from 'react-icons/md'
 
 const Header: React.FC = () => {
 
-    const { openSidebar, openSearch } = useUI()
+    const { openSidebar, openSearch,setModalView,openModal } = useUI()
     const { toggle }: any | boolean = useTheme()
     const { toggleFunction }:any = useTheme()
+    
     function handleOpen(){
          return openSidebar()
     }
 
     function openSearchFn(){
         return openSearch()
+    }
+
+   const handleAddTask = () => {
+    setModalView("Add")
+    return openModal()
    }
   
     const classes = useStyles()
@@ -65,7 +71,7 @@ const Header: React.FC = () => {
                                  aria-label="add-logic"
                                  variant='icon'
                                  className={classes.btn}
-
+                                 onClick={handleAddTask}
                                 >
                                 <IoAddCircleSharp size={30} />
                             </Button>

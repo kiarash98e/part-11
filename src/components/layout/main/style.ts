@@ -4,7 +4,8 @@ const useStyles = makeStyles(({
     main:{
         display: 'flex',
         flexGrow:"1",
-        position:"relative"
+        position:"relative",
+        flexDirection: 'column',
     }
 }))
 

@@ -44,11 +44,43 @@ export function editTask (
     ))
 }
 
+export function filterTask (
+    items:ITask[],
+    search:string
+  ) {
+    if(search !==" " || search){
+        return items.filter((itemTask:ITask) => (
+            itemTask!.task.includes(search)
+        ))
+    }
+    else{
+        return items
+    }
+}
+
+export function filterTaskBySelect (
+    items:ITask[],
+    filters:any
+  ) {
+    if(filters){
+        return items.filter((itemTask:ITask) => (
+                filters!.status || filters!.priority ? 
+                    itemTask!.status === filters!.status || itemTask!.priority === filters!.priority :
+                filters!.status && filters!.priority ? 
+                    itemTask!.status === filters!.status || itemTask!.priority === filters!.priority :
+                    null
+            ))
+    }
+    else{
+        return items
+    }
+}
+
 export function taskCount (items:ITask[]) {
     return items.length
 }
   
-export const setTodo = (state: any , todo:any) =>{
+export const setTodo = (state: any , todo?:any) =>{
     const {
         items,
         count

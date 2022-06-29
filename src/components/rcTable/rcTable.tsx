@@ -14,6 +14,7 @@ import { ITask } from '../../context/todos/todosFn';
 import moment from 'jalali-moment';
 import IconButton from '@mui/material/IconButton';
 import { IoTrashOutline, IoCreateOutline } from 'react-icons/io5'
+import { useUI } from '../../context/uiContext';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -127,6 +128,20 @@ export const RcTable:React.FC<RcTable> = ({data,headCells,toggle,isEmpty,count=0
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const { openModal,setModalView,setModalData } = useUI()
+
+  const handleDelete = (item:any) => {
+    setModalView("Delete")
+    setModalData({ item:item })
+    return openModal()
+  }
+
+  const handleEdit = (item:any) => {
+    setModalView("Edit")
+    setModalData({ item:item })
+    return openModal()
+  }
+
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof ITask,
@@ -200,31 +215,81 @@ export const RcTable:React.FC<RcTable> = ({data,headCells,toggle,isEmpty,count=0
                           hover
                           tabIndex={-1}
                           key={item!.id}
+                          
                         >
     
                           <TableCell
                             component="th"
     
                             scope="row"
-                            className='p-2'
+                            sx={{
+                              p:2,
+                              border:0,
+                              color: toggle ? "#212121" : "white"
+                            }}
                           >
                             {item!.task}
                           </TableCell>
                           <TableCell
-                            className='p-2' align="justify">{item!.status}</TableCell>
+                            sx={{
+                              p:2,
+                              border:0,
+                            }} align="justify">
+                              <span
+                                style={{
+                                  backgroundColor: item!.status === "todo" ? "plum" :
+                                  item!.status === "done" ? "#2eac11" :
+                                  item!.status === "doing" ? "blueviolet" : "transparent" ,
+                                  padding:"5px 15px 5px 15px",
+                                  borderRadius:"25px",
+                                  color: item!.status === "status" ? 
+                                    toggle ? "#212121" : "white" : "white"
+
+                                }}
+                              >
+                                {item!.status}
+                              </span>
+                            </TableCell>
                           <TableCell
-                            className='p-2' align="justify">{item!.priority}</TableCell>
+                            sx={{
+                              p:2,
+                              border:0,
+                              color: toggle ? "#212121" : "white"
+                            }} align="justify">
+                                <span
+                                style={{
+                                  backgroundColor: item!.priority === "high" ? "coral" :
+                                  item!.priority === "medium" ? "darkorange" :
+                                  item!.priority === "low" ? "sienna" : "transparent" ,
+                                  padding:"5px 15px 5px 15px",
+                                  borderRadius:"25px",
+                                  color: item!.priority === "priority" ? 
+                                    toggle ? "#212121" : "white" : "white"
+
+                                }}
+                              >
+                                {item!.priority}
+                              </span>
+                            </TableCell>
                           <TableCell
-                            className='p-2' align="justify">{convertedDeadline}</TableCell>
+                            sx={{
+                              p:2,
+                              border:0,
+                              color: toggle ? "#212121" : "white"
+                            }} align="justify">{convertedDeadline}</TableCell>
                           <TableCell
-                            className='p-2' align="justify">{<>
-                              <IconButton>
+                            sx={{
+                              p:2,
+                              border:0,
+                              color: toggle ? "#212121" : "white"
+                            }} align="justify">{<>
+                              <IconButton onClick={() => handleDelete(item)}>
                                 <IoTrashOutline />
                               </IconButton>
     
                             </>} {
                               <>
-                                <IconButton>
+                                <IconButton onClick={() => handleEdit(item)}>
                                   <IoCreateOutline />
                                 </IconButton>
                               </>
@@ -237,7 +302,7 @@ export const RcTable:React.FC<RcTable> = ({data,headCells,toggle,isEmpty,count=0
             </TableBody>
           </Table>
         </TableContainer>
-        { count > 0 ? 
+        { count > 5 ? 
           <TablePagination
             sx={{
               bgcolor:"white",

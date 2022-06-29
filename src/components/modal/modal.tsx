@@ -12,6 +12,7 @@ import { useUI } from "../../context/uiContext";
 import useOnClickOutside from "../../customHock/use-click-outside";
 import { useStyles } from "./style";
 import { Box, Button } from "@mui/material";
+import theme from "../../theme/theme";
 
 type ModalProps = {
 	open?: boolean;
@@ -140,11 +141,30 @@ const Modal: FC<ModalProps> = ({
 								<Box
 									ref={modalInnerRef}
 									sx={{
-										overflowY:'auto', height:"100%",borderRadius:"20px"
+										overflowY:'auto', 
+										height:"100%",
+										borderRadius:"20px",
+										bgcolor:"#fff",
+										[theme.breakpoints.down("md")]:{
+											width: "320px"
+										},
+										width:"550px",
 									}}
 									style={{ maxHeight: "calc(100vh - 140px)" }}
 								>
-									{children}
+									<Box
+										sx={{
+											width:"100%",
+											[theme.breakpoints.down("md")]:{
+												width:"96%",
+												px:2
+											},
+											px:4,
+											mx:"auto"
+										}}
+									>
+										{children}
+									</Box>
 								</Box>
 							</div>
 						</motion.div>
